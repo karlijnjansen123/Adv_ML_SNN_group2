@@ -2,14 +2,14 @@ import os, json
 from pathlib import Path
 import torch
 from dataset import SpeechCommands        
-from preprocessing import MFCCPreprocessor    
+from preprocessing import Preprocessor    
 
 
 def main():
     out_root = Path("features_mfcc")  
     out_root.mkdir(parents=True, exist_ok=True)
 
-    pre = MFCCPreprocessor(sample_rate=16000, n_mfcc=40, n_mels=64,fixed_frames=100)
+    pre = Preprocessor(sample_rate=16000, n_mfcc=40, n_mels=64,fixed_frames=100)
     ds = SpeechCommands(root="./data", preprocessor=pre)
 
 
@@ -33,7 +33,7 @@ def main():
         if (i + 1) % 1000 == 0:
             print(f"Saved {i+1}/{len(ds)}")
 
-    print("Done!")
+    print("Saved all of the classes in the dataset :)")
     
 
 
